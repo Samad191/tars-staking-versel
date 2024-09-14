@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "FuturaLight";
+  src: url("./assets/fonts/futura/FUTURA45LIGHT.TTF");
+}
+
+@font-face {
+  font-family: "FuturaRegular";
+  src: url("./assets/fonts/futura/FUTURA55REGULAR.TTF");
+}
+
+@font-face {
+  font-family: "FuturaMedium";
+  src: url("./assets/fonts/futura/FUTURA65MEDIUM.TTF");
+}
+
+@font-face {
+  font-family: "FuturaBold";
+  src: url("./assets/fonts/futura/FUTURA75BOLD.TTF");
+}
+
+@font-face {
+  font-family: "AvenirBlack";
+  src: url("./assets/fonts/avenir/Avenir-Black.otf");
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("./assets/fonts/avenir/Avenir-Light.otf");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("./assets/fonts/avenir/Avenir-Medium.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("./assets/fonts/avenir/Avenir-Roman.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("./assets/fonts/avenir/Avenir-Heavy.otf");
+  font-weight: 900;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Avenir" "Futura", "Inter", "Arial", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
