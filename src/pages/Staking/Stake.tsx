@@ -326,7 +326,7 @@ const Stake = ({
 
       setTimeout(async () => {
         console.log('time out running')
-        // await updateBalance();
+        await updateBalance();
         await getStakeLockedDurations()
         setStakeInput('0')
       }, 3000)
