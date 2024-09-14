@@ -40,6 +40,8 @@ function roundDownIfDecimal(num: number) {
 }
  
 const Stake = ({
+  // connection,
+  provider,
   tarsTokenBalance,
   contractLockingPeriod,
   firstTimeStaked,
@@ -47,6 +49,8 @@ const Stake = ({
   updateBalance,
   connection
 }: {
+  // connection: any,
+  provider: any,
   tarsTokenBalance: number;
   contractLockingPeriod: string | null;
   firstTimeStaked: boolean;
@@ -93,7 +97,7 @@ const Stake = ({
 
   const getStakeLockedDurations = async () => {
     console.log('locking values update kro')
-    let userStakeInfo = await getUserStaked(wallet);
+    let userStakeInfo = await getUserStaked(provider, wallet);
     console.log('new use eff', userStakeInfo, userStakeInfo?.lockinPeriod.toString())
     if (userStakeInfo?.lockinPeriod) {
       if (Number(userStakeInfo?.lockinPeriod) <= 30) {
@@ -253,7 +257,7 @@ const Stake = ({
 
       if (firstTimeStaked) {
         console.log('drox stake')
-        const res = await stake(wallet, connection, stakeInput, lockingPeriod);
+        const res = await stake(provider, wallet, connection, stakeInput, lockingPeriod);
         console.log("drox res", res);
 
         setStakeRes(res);
@@ -261,7 +265,7 @@ const Stake = ({
 
         // logic with mavia and kumail
         let newLogicLockingPeriod = 0;
-        let userStakeInfo = await getUserStaked(wallet);
+        let userStakeInfo = await getUserStaked(provider, wallet);
         let passedTime = 0;
      
         if(userStakeInfo && userStakeInfo.lockinPeriod) {
@@ -306,6 +310,7 @@ const Stake = ({
         
         console.log("drox restake", roundDownIfDecimal(newLogicLockingPeriod));
         const res = await restake(
+          provider,
           wallet,
           connection,
           stakeInput,

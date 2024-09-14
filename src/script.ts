@@ -7,7 +7,7 @@ import { TarsStakingNftProgram } from "./contract/types/tars_staking_nft_program
 
 /* The line `const connection = new Connection(clusterApiUrl("devnet"));` is creating a new connection
 object to interact with the Solana blockchain network. */
-const connection = new Connection(clusterApiUrl("devnet"));
+// const connection = new Connection(clusterApiUrl("devnet"));
 
 type UserTiers = {
   tierId: number;

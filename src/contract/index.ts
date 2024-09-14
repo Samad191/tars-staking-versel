@@ -133,9 +133,9 @@ export const getUserNftTrackerAccount = async (wallet: any) => {
   }
 };
 
-export const getTotalStaked = async (wallet: any) => {
+export const getTotalStaked = async (provider: any, wallet: any) => {
   try {
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
     //@ts-ignore
     let program = new anchor.Program(
       tarsStakingIDL as anchor.Idl,
@@ -154,9 +154,9 @@ export const getTotalStaked = async (wallet: any) => {
   }
 };
 
-export const getUserStaked = async (wallet: any) => {
+export const getUserStaked = async (provider: any, wallet: any) => {
   try {
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
 
     const sender = wallet.publicKey as PublicKey;
     // const sender = new PublicKey("9gRV2fyYHeYcXC1MwwVEDDo41Tvn5uqQ75ZKqpPkCyMu");
@@ -188,9 +188,10 @@ export const getUserStaked = async (wallet: any) => {
   }
 };
 
-export const getUserLockingPeriod = async (wallet: any) => {
+// remaining
+export const getUserLockingPeriod = async (provider: any, wallet: any) => {
   try {
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
     //@ts-ignore
     let program = new anchor.Program(
       tarsStakingIDL as anchor.Idl,
@@ -250,6 +251,7 @@ export const normalizeAmount = (lamports: number) => {
 };
 
 export const stake = async (
+  provider: any,
   wallet: any,
   connection: any,
   amount: string,
@@ -264,7 +266,7 @@ export const stake = async (
   try {
     const sender = wallet.publicKey as PublicKey;
 
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
     console.log("provider is ", provider);
 
     let associatedTokenAddress = await getUserTokenAccount(sender);
@@ -317,6 +319,7 @@ export const stake = async (
 };
 
 export const restake = async (
+  provider: any,
   wallet: any,
   connection: any,
   amount: string,
@@ -331,7 +334,7 @@ export const restake = async (
   try {
     // console.clear()
     const sender = wallet.publicKey as PublicKey;
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
     console.log("provider is ", provider);
 
     let associatedTokenAddress = await getUserTokenAccount(sender);
@@ -390,9 +393,9 @@ export const restake = async (
   }
 };
 
-export const claimNFT = async (wallet: any, tierId: number) => {
+export const claimNFT = async (provider: any, wallet: any, tierId: number) => {
   try {
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
     const sender = wallet.publicKey as PublicKey;
 
     const userAuthoritySigner = provider.wallet.publicKey;
@@ -553,10 +556,10 @@ export const claimNFT = async (wallet: any, tierId: number) => {
   }
 };
 
-export const unstake = async (wallet: any, connection: any, amount: any) => {
+export const unstake = async (provider: any, wallet: any, connection: any, amount: any) => {
   try {
     const sender = wallet.publicKey as PublicKey;
-    const provider = await getProvider(wallet);
+    // const provider = await getProvider(wallet);
 
     //@ts-ignore
     let program = new anchor.Program(

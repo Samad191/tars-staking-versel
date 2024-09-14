@@ -9,11 +9,15 @@ import { SOLANA_RPC } from "../../utils";
 import { Connection } from "@solana/web3.js";
 
 const Unstake = ({
+  provider,
+  connection,
   lockingPeriod,
   firstTimeStaked,
   stakedAmount,
   stakeStartTimeStamp
 }: {
+  provider: any,
+  connection: any,
   lockingPeriod: string | null;
   firstTimeStaked: boolean;
   stakedAmount: string;
@@ -36,7 +40,7 @@ const Unstake = ({
     preflightCommitment: "processed",
   } as any;
 
-  const connection = new Connection(SOLANA_RPC, opts.preflightCommitment);
+  // const connection = new Connection(SOLANA_RPC, opts.preflightCommitment);
 
 
   // account change listener here 
@@ -44,7 +48,7 @@ const Unstake = ({
     
     (async ()=>{
     if (wallet) {
-      let userStakeInfo = await getUserStaked(wallet);
+      let userStakeInfo = await getUserStaked(provider, wallet);
       console.log("userStakeInfo", userStakeInfo);
       console.log('userStakeInfo time', userStakeInfo?.stakingStartTimestamp.toString())
 
@@ -361,7 +365,7 @@ console.log("all conds2", Math.floor(((Date.now()/1000) - Number(stakeStartTimeS
             },
           }}
           onClick={async () => {
-            await unstake(wallet, connection, unstakeInput)
+            await unstake(provider, wallet, connection, unstakeInput)
           }}
 
           disabled={

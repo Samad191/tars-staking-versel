@@ -25,7 +25,7 @@ import * as anchor from "@coral-xyz/anchor";
 import { TarsStakingNftProgram } from "../../contract/types/tars_staking_nft_program";
 import tarsIdlStaking from '../../contract/idl/tars_staking_nft_program.json';
 
-const GPUTab = ({handleMainTabChange}: {handleMainTabChange: (value: number, tierNo: number) => void }) => {
+const GPUTab = ({ connection, handleMainTabChange}: {connection: any, handleMainTabChange: (value: number, tierNo: number) => void }) => {
   const [claimInput, setClaimInput] = useState<string | number>(0);
   const isDown900 = useMediaQuery("(max-width:900px)");
 
@@ -74,7 +74,7 @@ const GPUTab = ({handleMainTabChange}: {handleMainTabChange: (value: number, tie
   useEffect(() => {
     (async () => {
       if(publicKey) {
-        const connection = new Connection(SOLANA_RPC);
+        // const connection = new Connection(SOLANA_RPC);
         const tiersRewards = await calculateReward(connection, publicKey);
         let program = new anchor.Program(tarsIdlStaking as anchor.Idl, {
           connection,

@@ -12,7 +12,8 @@ import {
 } from "../../contract";
 import { Connection } from "@solana/web3.js";
 import { SOLANA_RPC } from "../../utils";
-const StakingMainTab = ({ stakingTabs, setStakingTabs }: any) => {
+const StakingMainTab = ({ connection, 
+  provider,stakingTabs, setStakingTabs }: any) => {
   // const [stakingTabs, setStakingTabs] = useState(0);
   const [lockingPeriod, setLockingPeriod] = useState<string | null>(null);
   const [tarsTokenBalance, setTarsTokenBalance] = useState<number>(0);
@@ -35,7 +36,7 @@ const StakingMainTab = ({ stakingTabs, setStakingTabs }: any) => {
   //   opts.preflightCommitment
   // );
 
-  const connection = new Connection(SOLANA_RPC, opts.preflightCommitment);
+  // const connection = new Connection(SOLANA_RPC, opts.preflightCommitment);
 
   // console.log("connection", connection);
 
@@ -77,7 +78,7 @@ const StakingMainTab = ({ stakingTabs, setStakingTabs }: any) => {
     console.log('xord 111111')
     setTarsTokenBalance(tokenBalance.value.uiAmount || 0);
 
-      let userStakeInfo = await getUserStaked(wallet);
+      let userStakeInfo = await getUserStaked(provider, wallet);
       console.log("userStakeInfo", userStakeInfo);
       // console.log('userStakeInfo time', userStakeInfo?.stakingStartTimestamp.toString())
 
@@ -276,6 +277,7 @@ const StakingMainTab = ({ stakingTabs, setStakingTabs }: any) => {
           <StakeTabs handleTabChange={handleStakeTabChange} tab={stakingTabs} />
           {stakingTabs === 0 && (
             <Stake
+              provider={provider}
               tarsTokenBalance={tarsTokenBalance}
               contractLockingPeriod={lockingPeriod}
               firstTimeStaked={firstTimeStaked}
@@ -284,9 +286,11 @@ const StakingMainTab = ({ stakingTabs, setStakingTabs }: any) => {
               connection={connection}
             />
           )}
-          {stakingTabs === 1 && <Reward totalPoints={totalPoints} />}
+          {stakingTabs === 1 && <Reward provider={provider} connection={connection} totalPoints={totalPoints} />}
           {stakingTabs === 2 && (
             <Unstake
+            provider={provider}
+            connection={connection}
               lockingPeriod={lockingPeriod}
               firstTimeStaked={firstTimeStaked}
               stakedAmount={stakedAmount}

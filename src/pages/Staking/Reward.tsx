@@ -54,7 +54,7 @@ let animationsArrayWithText = [
   },
 ];
 
-const Reward = ({ totalPoints }: { totalPoints: string }) => {
+const Reward = ({ provider, connection, totalPoints }: { provider: any, connection: any, totalPoints: string }) => {
   let carouselItems = [];
   const [currentItem, setCurrentItem] = useState(0);
 
@@ -120,7 +120,7 @@ const Reward = ({ totalPoints }: { totalPoints: string }) => {
         if(totalPoints){
           setReward(totalPoints)
         }else{
-        const connection = new Connection(SOLANA_RPC);
+        // const connection = new Connection(SOLANA_RPC);
         const tiersRewards = await calculateReward(connection, publicKey);
         // console.log("here reward", tiersRewards);
         // const tiers = Object.keys(tiersRewards).map((key) => Number(key))
@@ -171,7 +171,7 @@ const Reward = ({ totalPoints }: { totalPoints: string }) => {
 
   const handleClaimNft = async () => {
 
-    const res = await claimNFT(wallet, currentItem + 1)
+    const res = await claimNFT(provider, wallet, currentItem + 1)
       setClaimRes(res)
   }
 
